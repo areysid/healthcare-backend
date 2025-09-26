@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "prisma": "prisma"
+    "prisma": "prisma",
+    "vercel-build": "npx prisma generate"
   },
   "keywords": [],
   "author": "",
