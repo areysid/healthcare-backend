@@ -95,14 +95,14 @@ Create a `.env` file in the root:
 ```env
 # .env.example
 
-#Set PORT
-# PORT = 5000
+# Set PORT
+PORT = 5000
 
 # Local Example
 DATABASE_URL="postgresql://postgres:password@localhost:5432/healthcare_db"
 
 # Supabase Example
-# DATABASE_URL="postgresql://postgres:password@db.supabase.co:5432/postgres"
+DATABASE_URL="postgresql://postgres:password@db.supabase.co:5432/postgres"
 
 # JWT secret for signing tokens
 JWT_SECRET="your_jwt_secret"
