@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  patients  Patient[]
+}
+
+model Patient {
+  id        Int      @id @default(autoincrement())
+  name      String
+  age       Int
+  disease   String
+  createdAt DateTime @default(now())
+
+  createdBy Int
+  user      User     @relation(fields: [createdBy], references: [id])
+
+  mappings  PatientDoctorMapping[]
+}
+
+model Doctor {
+  id        Int      @id @default(autoincrement())
+  name      String
+  specialty String
+  createdAt DateTime @default(now())
+
+  mappings  PatientDoctorMapping[]
+}
+
+model PatientDoctorMapping {
+  id        Int     @id @default(autoincrement())
+  patientId Int
+  doctorId  Int
+
+  patient Patient @relation(fields: [patientId], references: [id])
+  doctor  Doctor  @relation(fields: [doctorId], references: [id])
+
+  @@unique([patientId, doctorId]) // Prevent duplicate mappings
+}
